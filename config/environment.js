@@ -22,11 +22,11 @@ module.exports = function(environment) {
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval'",
       'font-src': "'self'",
-      'connect-src': "'self'",
+      'connect-src': "'self' wss://*.firebaseio.com",
       'img-src': "'self'",
       'style-src': "'self' 'unsafe-inline'",
       'frame-src': "'none'"
-    }
+    },
   };
 
 
