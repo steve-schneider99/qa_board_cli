@@ -15,15 +15,28 @@ export default Ember.Controller.extend({
         this.transitionToRoute('questions');
       }
     },
-    addAnswer: function() {
-      var inputAnswer = this.get('newAnswer');
-      var newAnswers = this.get('answers').addObject(inputAnswer);
-      this.set('answers', newAnswers);
-      this.set('newAnswer', '');
-    },
-    deleteAnswer: function(params) {
-      var answers = this.get('answers');
-      answers.removeObject(params);
+    // addAnswer: function() {
+    //   var inputAnswer = this.get('newAnswer');
+    //   var newAnswers = this.get('answers').addObject(inputAnswer);
+    //   this.set('answers', newAnswers);
+    //   this.set('newAnswer', '');
+    // },
+    // deleteAnswer: function(params) {
+    //   var answers = this.get('answers');
+    //   answers.removeObject(params);
+    // }
+  // }
+  addAnswer: function() {
+    var answer = this.store.createRecord('answer', {
+      answer: this.get('newAnswer'),
+      timestamp: new Date()
+    });
+    this.set("newAnswer", "");
+    var question = this.get('model');
+    answer.save().then(function() {
+      question.get('answers').pushObject(answer);
+      question.save();
+    });
     }
   }
 });

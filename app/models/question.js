@@ -4,5 +4,5 @@ export default DS.Model.extend({
   question: DS.attr('string'),
   author: DS.attr('string'),
   description: DS.attr('string'),
-  // answers: hasMany('answers', {async: true})
+  answers: DS.hasMany('answers', {async: true})
 });
